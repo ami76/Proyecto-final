@@ -5,19 +5,23 @@ import re
 from nltk.corpus import stopwords
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, '..', 'models')
 
 # Cargar modelos y herramientas
 @st.cache_resource
 def cargar_modelos():
-    with open('../models/modelo_xgboost.pkl', 'rb') as f:
+    with open(os.path.join(MODELS_DIR, 'modelo_xgboost.pkl'), 'rb') as f:
         xgb = pickle.load(f)
-    with open('../models/tfidf_vectorizer.pkl', 'rb') as f:
+    with open(os.path.join(MODELS_DIR, 'tfidf_vectorizer.pkl'), 'rb') as f:
         tfidf = pickle.load(f)
-    with open('../models/label_encoder.pkl', 'rb') as f:
+    with open(os.path.join(MODELS_DIR, 'label_encoder.pkl'), 'rb') as f:
         le = pickle.load(f)
-    with open('../models/tokenizer.pkl', 'rb') as f:
+    with open(os.path.join(MODELS_DIR, 'tokenizer.pkl'), 'rb') as f:
         tokenizer = pickle.load(f)
-    modelo_nn = load_model('../models/modelo_red_neuronal.keras')
+    modelo_nn = load_model(os.path.join(MODELS_DIR, 'modelo_red_neuronal.keras'))
     return xgb, tfidf, le, tokenizer, modelo_nn
 
 xgb, tfidf, le, tokenizer, modelo_nn = cargar_modelos()
