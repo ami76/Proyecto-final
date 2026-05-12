@@ -1,7 +1,7 @@
 streamlit
 xgboost
 tensorflow==2.13.0
-scikit-learn==1.8.0
+scikit-learn==1.3.0
 pandas
 numpy
 nltk
